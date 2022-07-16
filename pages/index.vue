@@ -14,7 +14,7 @@ import {getTreeData} from '@/script/getTreeData.js'
 
 export default {
   asyncData({ params, error }) {
-    return getTreeData('file')
+    return getTreeData('files')
       .then(res => {
         return { data: res}
       })
@@ -44,7 +44,7 @@ export default {
       return (
           <span style="flex: 1; display: flex; align-items: center; justify-content: space-between; font-size: 14px; padding-right: 8px;">
             <span style={style}>
-              {isDirectory ? <span>{node.label}</span> : <nuxt-link style={style} to={to} >{node.label}</nuxt-link>}
+              {isDirectory ? <span>{node.label}</span> : <nuxt-link style={style} to={to} target="_blank">{node.label}</nuxt-link>}
             </span>
           </span>);   
     },
@@ -61,4 +61,5 @@ export default {
 .tree .el-tree-node__content{
   height: auto;
 }
+
 </style>
