@@ -61,7 +61,7 @@ export default {
 .tree .el-tree-node__content {
   height: auto;
 }
-.__layout {
+#__layout {
   overflow: auto;
   height: 100vh;
 }
