@@ -58,8 +58,11 @@ export default {
 }
 </script>
 <style>
-.tree .el-tree-node__content{
+.tree .el-tree-node__content {
   height: auto;
 }
-
+#__layout {
+  overflow: auto;
+  height: 100vh;
+}
 </style>
