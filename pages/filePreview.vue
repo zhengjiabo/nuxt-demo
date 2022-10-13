@@ -16,10 +16,20 @@ export default {
     this.$nextTick(() => {
       this.$refs.iframe.onload = () => {
         const document = this.$refs.iframe.contentDocument
-        const script = document.createElement('script')
+
+        // 修改样式
+        var style = document.createElement('style')
+        style.innerText = `div {
+          -webkit-line-clamp: unset !important;
+        }`
+        document.body.append(style)
+
+
+        var script = document.createElement('script')
 
         script.innerHTML = `
         var audio = document.querySelector('audio');
+        if(!audio) {return}
         audio.controls = true;
         audio.onerror = function () {
           var typeArr = ['mp3', 'm4a', 'mp4', 'mkv']; 
@@ -27,7 +37,11 @@ export default {
           var index = typeArr.indexOf(oldType); 
           index = ~index? index + 1: index; 
           var type = typeArr[index]; 
-          this.src = location.href.replace(/htm(l)?$/, type)
+          if(!type) return
+          var self = this
+          setTimeout(function() {
+            self.src = location.href.replace(/htm(l)?$/, type)
+          }, 200)
         };
         audio.src = location.href.replace(/htm(l)?$/, 'mp3');
         audio.style = 'position: fixed;top:6px;left:0;z-index: 10000;width: 100%';`
@@ -35,7 +49,7 @@ export default {
 
         document.body.append(script)
       };
-      this.src = ( process.env.NODE_ENV === 'production'? '' : location.origin.replace(location.port, '2333'))+ decodeURIComponent(this.$route.query.url)
+      this.src = decodeURIComponent(this.$route.query.url)
     })
   },
   methods: {
