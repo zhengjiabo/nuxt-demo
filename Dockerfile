@@ -7,7 +7,6 @@ ADD package.json yarn.lock /code/
 RUN yarn
 
 # 这里可以优化，只添加需要被打包的文件
-ADD .nuxt/ /code/.nuxt/
 ADD plugins/ /code/plugins/
 ADD script/ /code/script/
 ADD static/ /code/static/
