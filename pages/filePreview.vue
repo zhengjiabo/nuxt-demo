@@ -28,25 +28,31 @@ export default {
         var script = document.createElement('script')
 
         script.innerHTML = `
-        var audio = document.querySelector('audio');
-        if(!audio) {return}
-        audio.controls = true;
-        audio.onerror = function () {
-          var typeArr = ['mp3', 'm4a', 'mp4', 'mkv'];
-          var oldType = this.src.replace(location.href.replace(/html$/, ''), '');
-          var index = typeArr.indexOf(oldType);
-          index = ~index? index + 1: index;
-          var type = typeArr[index];
-          if(!type) return
-          setTimeout(function() {
-            audio.src = location.href.replace(/htm(l)?$/, type)
-          }, 200)
-        };
-        audio.src = location.href.replace(/htm(l)?$/, 'mp3');
-        audio.style = 'position: fixed;top:6px;left:0;z-index: 10000;width: 100%';`
+        function custom () {
+          var audio = document.querySelector('audio');
 
+          if(!audio) {return}
+          audio.controls = true;
+          audio.onerror = function () {
+            var typeArr = ['mp3', 'm4a', 'mp4', 'mkv'];
+            var oldType = this.src.replace(location.href.replace(/html$/, ''), '');
+            var index = typeArr.indexOf(oldType);
+            ~index && index++;
+            var type = typeArr[index];
+            if(!type) return
+            setTimeout(function() {
+              audio.src = location.href.replace(/htm(l)?$/, type)
+            }, 200)
+          };
+          audio.src = location.href.replace(/htm(l)?$/, 'mp3');
+          audio.style = 'position: fixed;top:6px;left:0;z-index: 10000;width: 100%';
+        }
+        custom()
+        `
 
-        document.body.append(script)
+        setTimeout(() => {
+          document.body.append(script)
+        }, 200)
       };
       this.src = decodeURIComponent(this.$route.query.url)
     })
