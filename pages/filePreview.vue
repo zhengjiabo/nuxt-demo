@@ -32,15 +32,14 @@ export default {
         if(!audio) {return}
         audio.controls = true;
         audio.onerror = function () {
-          var typeArr = ['mp3', 'm4a', 'mp4', 'mkv']; 
-          var oldType = this.src.replace(location.href.replace(/html$/, ''), ''); 
-          var index = typeArr.indexOf(oldType); 
-          index = ~index? index + 1: index; 
-          var type = typeArr[index]; 
+          var typeArr = ['mp3', 'm4a', 'mp4', 'mkv'];
+          var oldType = this.src.replace(location.href.replace(/html$/, ''), '');
+          var index = typeArr.indexOf(oldType);
+          index = ~index? index + 1: index;
+          var type = typeArr[index];
           if(!type) return
-          var self = this
           setTimeout(function() {
-            self.src = location.href.replace(/htm(l)?$/, type)
+            audio.src = location.href.replace(/htm(l)?$/, type)
           }, 200)
         };
         audio.src = location.href.replace(/htm(l)?$/, 'mp3');
@@ -53,7 +52,7 @@ export default {
     })
   },
   methods: {
-    
+
   }
 }
 </script>
