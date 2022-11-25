@@ -17,7 +17,7 @@ services:
     networks: # 指定 network 使这个容器成为该网络的一部分
       - traefik-proxy-network
     labels:
-      - traefik.enable=false
+      - traefik.enable=true
       - traefik.http.routers.jike-nuxt.rule=PathPrefix(`/jike`)
 
 
@@ -31,6 +31,6 @@ services:
     networks: # 指定 network 使这个容器成为该网络的一部分
       - traefik-proxy-network
     labels:
-      - traefik.enable=false
+      - traefik.enable=true
       - traefik.http.routers.jike-nginx.rule=PathPrefix(`/files`)
 
