@@ -21,7 +21,7 @@ export default {
         var style = document.createElement('style')
         style.innerText = `div {
           -webkit-line-clamp: unset !important;
-          user-select: auto;
+          user-select: auto !important;
         }`
         document.body.append(style)
 
