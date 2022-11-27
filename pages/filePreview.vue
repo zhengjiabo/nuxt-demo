@@ -23,6 +23,9 @@ export default {
           -webkit-line-clamp: unset !important;
         }
         * {
+          -webkit-user-select: text !important;
+          -moz-user-select: text !important;
+          -ms-user-select: text !important;
           user-select: text !important;
         }`
         document.body.append(style)
